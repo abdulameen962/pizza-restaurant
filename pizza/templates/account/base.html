@@ -1,0 +1,60 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="{% static 'pizza/css/styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pizza/css/styles/aos.css' %}"> {% endcomment %}
+    <title> {% block title %} Restaurant {% endblock  %} </title>
+    {% comment %} <link rel="shortcut icon" href="{% static 'pizza/css/images/icon.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'pizza/css/styles/styles.css' %}">
+    <meta property="og:type" content="{% block type_content %} website {% endblock  %}" />	
+    <meta property="og:site_name" content="{% block meta_content %} Football pizza {% endblock  %}" />
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:data1" content="1 minute" />
+    <meta name="description" content="{% block description %} A Football prediction web app {% endblock  %} " />
+    <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+    <link rel='dns-prefetch' href='//s.w.org' />
+    <link rel="canonical" href="https://{{ current_site }}{{ request.path }}" />
+    <meta property="og:title" content="{% block og_title %} pizza {% endblock  %}" />
+    <meta property="og:description" content="A Football prediction web app" />
+    <meta property="og:url" content="https://{{ current_site }}{{ request.path }}" />
+    <link rel="apple-touch-icon" href="{% static 'pizza/images/icon.svg' %}" />
+    <meta name="msapplication-TileImage" content="{% static 'pizza/images/icon.svg' %}" /> {% endcomment %}
+    {% comment %} <link rel="shortcut icon" href="{% static 'pizza/images/logo2.png' %}" type="image/x-icon"> {% endcomment %}
+    {% block meta %}
+    
+    {% endblock  %}
+</head>
+<body>
+  <div class="base_login_main row">
+    <div class="signup_main col-sm-12 col-md-6 col-lg-6">
+      <nav class="navbar navbar-expand-lg nav-position mainnav">
+        <div class="container-fluid resize-small">
+          <a class="navbar-brand" href="/"><img src="{% static 'pizza/css/images/icon.svg' %}" alt="logo"/></a>
+      </nav>
+      <div class="container-fluid resize-small login-middle">
+        {% block content %}
+        {% endblock %}
+        {% block extra_body %}
+        {% endblock %}
+      </div>
+    </div>
+    <div class="image col-sm-12 col-md-6 col-lg-6">
+       <div class="image_main">
+
+       </div>
+    </div>
+  </div>
+    {% comment %} <script src="{% static 'pizza/js/aos.js' %}"></script> {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>    
+    {% comment %} <script src="{% static 'pizza/js/vue.js' %}"></script>
+    <script src="{% static 'pizza/js/script.js' %}"></script> {% endcomment %}
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

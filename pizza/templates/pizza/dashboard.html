@@ -1,0 +1,131 @@
+{% extends 'pizza/dashboard-base.html' %}
+{% block title %} Dashboard {% endblock  %}
+{% block content %}
+{% if 2fa_verified is False %}
+  <ul class="messages">
+    <li>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            If you haven't activated your 2fa,do so now <a href="{% url 'two-factor-setup' %}">Here</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </li>
+  </ul>
+{% endif %}
+<dashboard-singles :singles="[{name:'Money spent',status:'up',status_percent:'10',result:'$2400',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`}]"></dashboard-singles>
+<div class="dashboard_graph_container row">
+    <div class="col-sm-12 col-md-9 col-lg-9">
+        <h3>Daily Creations</h3>
+        <canvas id="daily_creations"></canvas>
+    </div>
+    <div class="col-sm-12 col-md-3 col-lg-3">
+        <h3>Daily Expenditure</h3>
+        <canvas id="total_spent"></canvas>
+    </div>
+</div>
+<div class="dashboard_bottom_tables_container row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <h3>Trending Pizzas</h3>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <h3>Trending Creators</h3>
+    </div>
+</div>
+{% endblock  %}
+{% block extra_script %}
+<script>
+    const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+    const yValues = [7,8,8,9,14,15,12,10,9,10,8];
+    var line_chart = document.getElementById("daily_creations");
+    var spent_chart = document.getElementById("total_spent");
+    var ctx = line_chart.getContext("2d")
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(250,174,50,1)');   
+    gradient.addColorStop(1, 'rgba(250,174,50,0.2)');
+    new Chart(line_chart, {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: true,
+          lineTension: 0.4,
+          backgroundColor: gradient,
+          borderColor: 'rgba(250,174,50,1)',
+          borderWidth: 15,
+          pointBackgroundColor: "rgba(0,0,0,0)",
+          pointBorderWidth: 0,
+          pointHoverBackgroundColor: 'rgba(250,174,50,1)',
+          pointHoverBorderWidth: 0,
+          pointHoverBorderColor : 'rgba(250,174,50,1)',
+          showLine: false,
+          data: yValues
+        }]
+      },
+      options: {
+        {% comment %} legend: {display: false}, {% endcomment %}
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+          },
+          y:{
+            grid:{
+              tickColor: 'rgba(0,0,0,0)',
+            },
+            border: {
+              dash: [4,6],
+            },  
+            ticks:{
+              color: 'grey',
+            }
+          }
+        },
+        title:{
+          display: false,
+        },
+        tooltips: {
+          callbacks: {
+             label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+             }
+          }
+      }
+        {% comment %} scales: {
+          yAxes: [{ticks: {min: 6, max:16}}],
+        } {% endcomment %}
+      }
+    });
+    var starValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var dyValues = [55, 49, 44, 24, 15];
+    var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
+    new Chart("total_spent", {
+        type: "doughnut",
+        data: {
+          labels: starValues,
+          datasets: [{
+            backgroundColor: barColors,
+            borderWidth: 1,
+            data: dyValues
+          }]
+        },
+        options:{
+          legend:{
+            display: false
+          }
+        },
+        {% comment %} options: {
+          title: {
+            display: true,
+            text: "World Wide Wine Production 2018"
+          }
+        } {% endcomment %}
+      });
+</script>
+
+{% endblock  %}
