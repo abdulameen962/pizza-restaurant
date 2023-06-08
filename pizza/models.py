@@ -21,6 +21,19 @@ class Pizza(models.Model):
     def __str__(self):
         return f"{self.name} pizza"
     
+
+class Category(models.Model):
+    title = models.CharField(max_length=50)
+    code = models.CharField(max_length=5)
+    objects = models.Manager()
+
+    def __str__(self):
+        return f"{self.title}"
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+    
 class Topping(models.Model):
     name = models.CharField(max_length=150)
     picture = CloudinaryField("image",blank=True,default=None,null=True)
@@ -40,6 +53,7 @@ class Creation(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField(max_length=500)
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE,related_name="pizza_creation")
+    category = models.ForeignKey(Pizza, on_delete=models.CASCADE,related_name="pizza_category",null=True,blank=True)
     toppings = models.ManyToManyField(Topping,related_name="toppings_creation",blank=True)
     picture = CloudinaryField("image",blank=True,default=None,null=True)
     price = models.FloatField(default=0)
