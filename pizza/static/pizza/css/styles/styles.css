@@ -738,10 +738,13 @@ section.dashboard_nav {
         width: 100vw;
         min-height: 90vh;
         border-radius: 0px; } }
-    section.dashboard_nav div.body_main div.container-main div.dashboard_single {
-      background: white;
-      border-radius: 20px;
-      border: none; }
+    section.dashboard_nav div.body_main div.container-main div.dashboard_container {
+      margin: 20px 0px; }
+      section.dashboard_nav div.body_main div.container-main div.dashboard_container div.dashboard_single {
+        background: white;
+        border-radius: 25px;
+        border: none;
+        padding: 15px 20px; }
     section.dashboard_nav div.body_main div.dashboard_single_container {
       display: grid;
       justify-content: space-between;

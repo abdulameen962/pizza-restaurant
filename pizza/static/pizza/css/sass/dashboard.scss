@@ -261,10 +261,14 @@ section.dashboard_nav {
                 border-radius: 0px;
                 // background: rgba(#EFF1F5, .5);
             }
-            div.dashboard_single {
-                background: $white;
-                border-radius: 20px;
-                border: none;
+            div.dashboard_container {
+                margin: 20px 0px;
+                div.dashboard_single {
+                    background: $white;
+                    border-radius: 25px;
+                    border: none;
+                    padding: 15px 20px;
+                }
             }
         }
         div.container-main,

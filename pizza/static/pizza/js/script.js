@@ -79,7 +79,7 @@ app.component("dashboard-singles", {
         singles: Array
     },
     template: `
-    <div class="dashboard_single_container">
+    <div class="dashboard_single_container dashboard_container">
         <div v-for="single in singles" class="dashboard_single">
             <div class="dashboard_single_top">
                 <header class="dashboard_single_top_header">
@@ -245,7 +245,7 @@ app.component("charts", {
         });
     },
     template: `
-        <div class="dashboard_graph_container row">
+        <div class="dashboard_graph_container row dashboard_container">
             <div class="col-sm-12 col-md-9 col-lg-9 dashboard_single">
                 <h3>Daily Creations</h3>
                 <canvas id="daily_creations"></canvas>
