@@ -11,121 +11,79 @@
     </li>
   </ul>
 {% endif %}
-<dashboard-singles :singles="[{name:'Money spent',status:'up',status_percent:'10',result:'$2400',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`}]"></dashboard-singles>
-<div class="dashboard_graph_container row">
-    <div class="col-sm-12 col-md-9 col-lg-9">
-        <h3>Daily Creations</h3>
-        <canvas id="daily_creations"></canvas>
-    </div>
-    <div class="col-sm-12 col-md-3 col-lg-3">
-        <h3>Daily Expenditure</h3>
-        <canvas id="total_spent"></canvas>
-    </div>
-</div>
+<dashboard-singles :singles="[{name:'Money spent',status:'up',status_percent:'10',result:'${{ user_money_spent }}',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`},{name:'Creations',status:'up',status_percent:'10',result:'{{ user_creations }}',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`},{name:'Completed Orders',status:'up',status_percent:'10',result:'{{ user_completed_orders }}',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`},{name:'Pending Orders',status:'up',status_percent:'10',result:'{{ user_pending_orders }}',shape:`<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='8' cy='8' r='8' fill='#FFA500'/><path d='M12 11.125V5M12 5H5.875M12 5L5 12' stroke='white' stroke-width='1.38095' stroke-linecap='round' stroke-linejoin='round'/></svg>`}]"></dashboard-singles>
+<charts :total_money_spent="'${{ user_money_spent }}'" :line_chart_x_values="[50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]" :line_chart_y_values="[0, 2, 4, 9, 14, 15, 12, 10, 6, 4, 0]" :doughnut_chart_x_values='["Italy", "France", "Spain"]' :doughnut_chart_y_values="[55, 49, 44]"></charts>
 <div class="dashboard_bottom_tables_container row">
-    <div class="col-sm-12 col-md-6 col-lg-6">
-        <h3>Trending Pizzas</h3>
+    <div class="col-sm-12 col-md-6 col-lg-6 dashboard_single">
+        <div class="table_top">
+          <h3>Trending Creations</h3>
+          <a href="#">Show all 
+          <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.9703 17.4817C11.8448 17.359 11.7743 17.1926 11.7743 17.0192C11.7743 16.8458 11.8448 16.6794 11.9703 16.5567L18.8681 9.81975L0.826573 9.81975C0.648816 9.81975 0.47834 9.75079 0.352647 9.62805C0.226954 9.50531 0.156341 9.33883 0.156341 9.16525C0.156341 8.99167 0.226954 8.82519 0.352647 8.70245C0.47834 8.57971 0.648816 8.51075 0.826573 8.51075L18.8681 8.51075L11.9703 1.77381C11.8519 1.64974 11.7874 1.48564 11.7905 1.31608C11.7936 1.14652 11.8639 0.984739 11.9867 0.864824C12.1095 0.744909 12.2752 0.67622 12.4488 0.673228C12.6225 0.670237 12.7905 0.733175 12.9176 0.848786L20.9603 8.70274C21.0858 8.82546 21.1563 8.99181 21.1563 9.16525C21.1563 9.33869 21.0858 9.50504 20.9603 9.62776L12.9176 17.4817C12.7919 17.6043 12.6215 17.6731 12.4439 17.6731C12.2663 17.6731 12.096 17.6043 11.9703 17.4817Z" fill="#CF893D"/>
+          </svg>
+          </a>
+        </div>
+        <div class="table_bottom">
+          <h4>Pizzas</h4>
+          <div class="table_bottom_table">
+            {% for pizza in trending_pizzas %}
+              <a class="div_table_link" href="#">
+                <div class="table_bottom_table_single">
+                  <div class="table_bottom_table_single_left">
+                    {% if pizza.picture %}
+                      <img src="{{ pizza.picture.url }}" alt="{{ pizza.name }}"/>
+                    {% else %}
+                      <img src="#" alt="{{ pizza.name }}"/>                  
+                    {% endif %}
+                  </div>
+                  <div class="table_bottom_table_single_right">
+                    <h3> {{ pizza.name }} </h3>
+                    <p class="order_p">Order: {{ pizza.creation_orders.all.count }} </p>
+                  </div>
+                </div>
+              </a>
+            {% empty %}
+              <p>No pizza yet</p>
+            {% endfor %}
+          </div>
+        </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-6">
+    <div class="col-sm-12 col-md-6 col-lg-6 dashboard_single">
+      <div class="table_top">
         <h3>Trending Creators</h3>
+        <a href="#">Show all 
+          <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.9703 17.4817C11.8448 17.359 11.7743 17.1926 11.7743 17.0192C11.7743 16.8458 11.8448 16.6794 11.9703 16.5567L18.8681 9.81975L0.826573 9.81975C0.648816 9.81975 0.47834 9.75079 0.352647 9.62805C0.226954 9.50531 0.156341 9.33883 0.156341 9.16525C0.156341 8.99167 0.226954 8.82519 0.352647 8.70245C0.47834 8.57971 0.648816 8.51075 0.826573 8.51075L18.8681 8.51075L11.9703 1.77381C11.8519 1.64974 11.7874 1.48564 11.7905 1.31608C11.7936 1.14652 11.8639 0.984739 11.9867 0.864824C12.1095 0.744909 12.2752 0.67622 12.4488 0.673228C12.6225 0.670237 12.7905 0.733175 12.9176 0.848786L20.9603 8.70274C21.0858 8.82546 21.1563 8.99181 21.1563 9.16525C21.1563 9.33869 21.0858 9.50504 20.9603 9.62776L12.9176 17.4817C12.7919 17.6043 12.6215 17.6731 12.4439 17.6731C12.2663 17.6731 12.096 17.6043 11.9703 17.4817Z" fill="#CF893D"/>
+          </svg>
+        </a>
+      </div>
+      <div class="table_bottom">
+        <h4>Creators</h4>
+        <div class="table_bottom_table">
+          {% for creator in trending_creators %}
+            <a class="div_table_link" href="#">
+              <div class="table_bottom_table_single">
+                <div class="table_bottom_table_single_left">
+                  {% if creator.user_profile.profile_pic %}
+                    <img src="{{ creator.user_profile.profile_pic.url }}" alt="{{ creator.username }}"/>
+                  {% else %}
+                    <img src="#" alt="{{ creator.username }}"/>                  
+                  {% endif %}
+                </div>
+                <div class="table_bottom_table_single_right">
+                  <h3> {{ creator.username }} </h3>
+                  <p class="order_p">Creations: {{ creator.creations.all.count }} </p>
+                </div>
+              </div>
+            </a>
+          {% empty %}
+            <p>No creator yet</p>
+          {% endfor %}
+        </div>
+      </div>
     </div>
 </div>
 {% endblock  %}
 {% block extra_script %}
-<script>
-    const xValues = [50,60,70,80,90,100,110,120,130,140,150];
-    const yValues = [7,8,8,9,14,15,12,10,9,10,8];
-    var line_chart = document.getElementById("daily_creations");
-    var spent_chart = document.getElementById("total_spent");
-    var ctx = line_chart.getContext("2d")
-    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(250,174,50,1)');   
-    gradient.addColorStop(1, 'rgba(250,174,50,0.2)');
-    new Chart(line_chart, {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          fill: true,
-          lineTension: 0.4,
-          backgroundColor: gradient,
-          borderColor: 'rgba(250,174,50,1)',
-          borderWidth: 15,
-          pointBackgroundColor: "rgba(0,0,0,0)",
-          pointBorderWidth: 0,
-          pointHoverBackgroundColor: 'rgba(250,174,50,1)',
-          pointHoverBorderWidth: 0,
-          pointHoverBorderColor : 'rgba(250,174,50,1)',
-          showLine: false,
-          data: yValues
-        }]
-      },
-      options: {
-        {% comment %} legend: {display: false}, {% endcomment %}
-        scales: {
-          x: {
-            grid: {
-              display: false
-            },
-          },
-          y:{
-            grid:{
-              tickColor: 'rgba(0,0,0,0)',
-            },
-            border: {
-              dash: [4,6],
-            },  
-            ticks:{
-              color: 'grey',
-            }
-          }
-        },
-        title:{
-          display: false,
-        },
-        tooltips: {
-          callbacks: {
-             label: function(tooltipItem) {
-                    return tooltipItem.yLabel;
-             }
-          }
-      }
-        {% comment %} scales: {
-          yAxes: [{ticks: {min: 6, max:16}}],
-        } {% endcomment %}
-      }
-    });
-    var starValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var dyValues = [55, 49, 44, 24, 15];
-    var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-    ];
-    new Chart("total_spent", {
-        type: "doughnut",
-        data: {
-          labels: starValues,
-          datasets: [{
-            backgroundColor: barColors,
-            borderWidth: 1,
-            data: dyValues
-          }]
-        },
-        options:{
-          legend:{
-            display: false
-          }
-        },
-        {% comment %} options: {
-          title: {
-            display: true,
-            text: "World Wide Wine Production 2018"
-          }
-        } {% endcomment %}
-      });
-</script>
 
 {% endblock  %}

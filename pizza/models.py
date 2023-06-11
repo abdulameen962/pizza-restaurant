@@ -11,6 +11,7 @@ class Pizza(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0)
     picture = CloudinaryField("image",blank=True,default=None,null=True)
+    available = models.BooleanField(default=True)
     objects = models.Manager()
 
     class Meta:
@@ -38,6 +39,7 @@ class Topping(models.Model):
     name = models.CharField(max_length=150)
     picture = CloudinaryField("image",blank=True,default=None,null=True)
     price = models.FloatField(default=0)
+    available = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=False,default=timezone.now)
     objects = models.Manager()
 
@@ -58,6 +60,7 @@ class Creation(models.Model):
     picture = CloudinaryField("image",blank=True,default=None,null=True)
     price = models.FloatField(default=0)
     created = models.DateTimeField(auto_now_add=False,default=timezone.now)
+    available = models.BooleanField(default=True)
     objects = models.Manager()
 
     class Meta:

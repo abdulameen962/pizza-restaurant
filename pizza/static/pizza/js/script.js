@@ -85,16 +85,176 @@ app.component("dashboard-singles", {
                 <header class="dashboard_single_top_header">
                     <h3> {{ single.name }} </h3>
                 </header>
-                <span v-if="single.status == 'up'" class="text-success"> {{ single.status_percent }} </span>
-                <span v-else-if="single.status == 'down'" class="text-danger"> {{ single.status_percent }}% </span>
+                <span v-if="single.status == 'up'" class="text-success">
+                    <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.219948 7.74415L6.96942 0.244396C7.03907 0.166918 7.12178 0.105454 7.21282 0.0635184C7.30386 0.0215828 7.40145 -6.14362e-07 7.5 -6.14362e-07C7.59855 -6.14362e-07 7.69614 0.0215828 7.78718 0.0635184C7.87822 0.105454 7.96093 0.166918 8.03058 0.244396L14.7801 7.74415C14.8851 7.86069 14.9566 8.00923 14.9856 8.17096C15.0145 8.3327 14.9997 8.50035 14.9429 8.6527C14.8861 8.80504 14.7899 8.93524 14.6664 9.02679C14.543 9.11835 14.3979 9.16715 14.2495 9.16702H8.24994V19.1667C8.24994 19.3877 8.17093 19.5997 8.03029 19.7559C7.88965 19.9122 7.6989 20 7.5 20C7.3011 20 7.11035 19.9122 6.96971 19.7559C6.82907 19.5997 6.75006 19.3877 6.75006 19.1667L6.75006 9.16702H0.750532C0.602121 9.16715 0.457013 9.11835 0.333577 9.02679C0.210142 8.93524 0.11393 8.80504 0.05712 8.6527C0.000310089 8.50035 -0.0145429 8.3327 0.0144426 8.17096C0.0434281 8.00923 0.114948 7.86069 0.219948 7.74415Z" fill="#84C285"/>
+                    </svg>
+                    {{ single.status_percent }}% 
+                </span>
+                <span v-else-if="single.status == 'down'" class="text-danger">
+                    <svg width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.2169 12.8808L8.46738 20.3806C8.39773 20.4581 8.31502 20.5195 8.22398 20.5615C8.13294 20.6034 8.03535 20.625 7.9368 20.625C7.83824 20.625 7.74066 20.6034 7.64962 20.5615C7.55857 20.5195 7.47586 20.4581 7.40621 20.3806L0.656746 12.8808C0.551746 12.7643 0.480226 12.6158 0.451241 12.454C0.422255 12.2923 0.437107 12.1247 0.493917 11.9723C0.550727 11.82 0.64694 11.6898 0.770376 11.5982C0.893812 11.5067 1.03892 11.4578 1.18733 11.458H7.18686V1.45831C7.18686 1.2373 7.26587 1.02535 7.40651 0.86907C7.54715 0.712795 7.7379 0.625 7.9368 0.625C8.13569 0.625 8.32645 0.712795 8.46709 0.86907C8.60773 1.02535 8.68674 1.2373 8.68674 1.45831V11.458H14.6863C14.8347 11.4578 14.9798 11.5067 15.1032 11.5982C15.2267 11.6898 15.3229 11.82 15.3797 11.9723C15.4365 12.1247 15.4513 12.2923 15.4224 12.454C15.3934 12.6158 15.3219 12.7643 15.2169 12.8808Z" fill="#DD483D"/>
+                    </svg>
+                    {{ single.status_percent }}% 
+                </span>
             </div>
             <div class="dashboard_single_bottom">
-                <span v-html="single.shape"> {{ single.shape }} {{ single.result }} </span>
+                <span v-html="single.shape"> {{ single.shape }}</span><span> {{ single.result }}</span>
             </div>
         </div>
     </div>
     
     `
 })
+app.component("charts", {
+    props: {
+        line_chart_x_values: Array,
+        line_chart_y_values: Array,
+        doughnut_chart_x_values: Array,
+        doughnut_chart_y_values: Array,
+        total_money_spent: String
+    },
+    mounted() {
+        const total_money_spent = this.total_money_spent;
+        const xValues = this.line_chart_x_values;
+        const yValues = this.line_chart_y_values;
+        var line_chart = document.getElementById("daily_creations");
+        var spent_chart = document.getElementById("total_spent");
+        var ctx = line_chart.getContext("2d")
+        var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(250,174,50,.8)');
+        gradient.addColorStop(1, 'rgba(250,174,50,0)');
+        new Chart(line_chart, {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: "First dataset",
+                    fill: true,
+                    lineTension: 0.4,
+                    backgroundColor: gradient,
+                    borderColor: 'rgba(250,174,50,1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: "rgba(0,0,0,0)",
+                    pointBorderWidth: 0,
+                    pointHoverBackgroundColor: 'rgba(250,174,50,1)',
+                    pointHoverBorderWidth: 0,
+                    pointHoverBorderColor: 'rgba(250,174,50,1)',
+                    data: yValues
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false,
+                        },
+                        border: {
+                            display: false,
+                        },
+                        ticks: {
+                            color: 'grey',
+                            padding: 15,
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            tickColor: 'rgba(0,0,0,0)',
+                        },
+                        border: {
+                            dash: [4, 6],
+                            display: false,
+                        },
+                        ticks: {
+                            color: 'grey',
+                            padding: 15,
+                            min: 6,
+                            max: 16,
+                        }
+                    }
+                },
+                title: {
+                    display: false,
+                },
+                // tooltips: {
+                //     callbacks: {
+                //         label: function(tooltipItem) {
+                //             return tooltipItem.yLabel;
+                //         }
+                //     }
+                // }
+            }
+        });
+        var starValues = this.doughnut_chart_x_values;
+        var dyValues = this.doughnut_chart_y_values;
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+        ];
+        var ctx = spent_chart.getContext("2d")
+        const centerText = {
+            id: 'centerText',
+            afterDatasetsDraw(chart, args, pluginOptions) {
+                const { ctx, data } = chart;
+                const text = total_money_spent
+                ctx.save()
+                const x = chart.getDatasetMeta(0).data[0].x;
+                const y = chart.getDatasetMeta(0).data[0].y;
+                ctx.textAlign = "center";
+                ctx.textBaseline = 'middle';
+                ctx.font = 'bold 30px sans-serif';
 
-app.mount("body");
+                ctx.fillText(text, x, y)
+            }
+        }
+        new Chart("total_spent", {
+            type: "doughnut",
+            data: {
+                labels: starValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    borderWidth: 1,
+                    cutout: '85%',
+                    spacing: 3,
+                    borderRadius: 30,
+                    data: dyValues
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                        }
+                    },
+                    tooltips: {
+                        cornerRadius: 3,
+                    },
+                },
+            },
+            plugins: [centerText]
+        });
+    },
+    template: `
+        <div class="dashboard_graph_container row">
+            <div class="col-sm-12 col-md-9 col-lg-9 dashboard_single">
+                <h3>Daily Creations</h3>
+                <canvas id="daily_creations"></canvas>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3 dashboard_single">
+                <h3>Daily Expenditure</h3>
+                <canvas id="total_spent"></canvas>
+            </div>
+        </div>
+    `
+})
+app.mount("#app");

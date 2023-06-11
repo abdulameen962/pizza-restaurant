@@ -613,13 +613,10 @@ section.dashboard_nav {
       section.dashboard_nav aside a.navbar-brand img {
         transform: scale(0.8); }
       section.dashboard_nav aside a.navbar-brand span.expand_content {
-        padding-left: 8px;
-        color: #353745; }
+        color: #353745;
+        padding-top: 15px; }
         section.dashboard_nav aside a.navbar-brand span.expand_content:visited, section.dashboard_nav aside a.navbar-brand span.expand_content:hover {
           color: #353745; }
-        @media screen and (min-width: 0px) and (max-width: 991px) {
-          section.dashboard_nav aside a.navbar-brand span.expand_content {
-            padding-left: 2px; } }
     section.dashboard_nav aside div.responsive_content {
       display: none; }
       @media screen and (min-width: 0px) and (max-width: 991px) {
@@ -661,6 +658,13 @@ section.dashboard_nav {
   @media screen and (min-width: 0px) and (max-width: 991px) and (min-width: 0px) and (max-width: 991px) {
     section.dashboard_nav aside > section {
       padding: 85px 25px 0px; } }
+      section.dashboard_nav aside > section > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between; }
       section.dashboard_nav aside > section span.expand_content {
         display: block; }
       section.dashboard_nav aside > section div.btn-group {
@@ -689,13 +693,17 @@ section.dashboard_nav {
           section.dashboard_nav aside > section ul.navbar_main_content {
             padding: 0px 5px; } }
         section.dashboard_nav aside > section ul.navbar_main_content > li {
-          margin-top: 25px; }
+          margin-bottom: 20px; }
           section.dashboard_nav aside > section ul.navbar_main_content > li a,
           section.dashboard_nav aside > section ul.navbar_main_content > li div {
-            color: #353745; }
-            section.dashboard_nav aside > section ul.navbar_main_content > li a svg path,
-            section.dashboard_nav aside > section ul.navbar_main_content > li div svg path {
-              fill: #A3A5AF; }
+            color: #353745;
+            font-size: 14px; }
+            section.dashboard_nav aside > section ul.navbar_main_content > li a svg,
+            section.dashboard_nav aside > section ul.navbar_main_content > li div svg {
+              transform: scale(0.8); }
+              section.dashboard_nav aside > section ul.navbar_main_content > li a svg path,
+              section.dashboard_nav aside > section ul.navbar_main_content > li div svg path {
+                fill: #A3A5AF; }
             section.dashboard_nav aside > section ul.navbar_main_content > li a:hover,
             section.dashboard_nav aside > section ul.navbar_main_content > li div:hover {
               padding: 10px 13px;
@@ -730,12 +738,25 @@ section.dashboard_nav {
         width: 100vw;
         min-height: 90vh;
         border-radius: 0px; } }
+    section.dashboard_nav div.body_main div.container-main div.dashboard_single {
+      background: white;
+      border-radius: 20px;
+      border: none; }
     section.dashboard_nav div.body_main div.dashboard_single_container {
       display: grid;
       justify-content: space-between;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0px 30px;
       gap: 0px 35px; }
+    section.dashboard_nav div.body_main div.nav_main_header {
+      display: flex;
+      justify-content: space-between; }
+      section.dashboard_nav div.body_main div.nav_main_header h2 {
+        margin: 0;
+        padding: 0; }
+      section.dashboard_nav div.body_main div.nav_main_header p {
+        margin: 0;
+        padding: 0; }
   section.dashboard_nav form {
     position: relative; }
     section.dashboard_nav form ul.searchoptions,
@@ -762,7 +783,7 @@ section.dashboard_nav {
     section.dashboard_nav form div.input-group {
       margin-right: 30px;
       border: none;
-      background: #F1F1F3;
+      background: white;
       outline: none;
       border-radius: 10px;
       padding: 10px 8px;
