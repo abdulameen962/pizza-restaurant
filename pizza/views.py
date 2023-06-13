@@ -14,6 +14,7 @@ from .signals import *
 import random
 from django.contrib.auth.mixins import UserPassesTestMixin
 from .models import *
+from .helper_functions import *
 # Ensure users go through the allauth workflow when logging into admin.
 admin.site.login = staff_member_required(admin.site.login, login_url='/users/login/')
 # Run the standard admin set-up.
@@ -46,35 +47,6 @@ def not_verified(request):
     return render(request,"account/verified_email_required.html")
 
 
-def lowest(pizzas):
-    lowest_pizza = ""
-
-    for pizza in pizzas:
-        for second in pizzas:
-            if pizza != second:
-                if len(pizza.creation_orders.all()) <= len(pizza.creation_orders.all()):
-                    if lowest_pizza == "":
-                        lowest_pizza = pizza
-
-                    elif len(pizza.creation_orders.all()) < len(lowest_pizza.creation_orders.all()):
-                        lowest_pizza = pizza
-
-    return lowest_pizza
-
-def lowestCreator(creators):
-    lowest_creator = ""
-
-    for first in creators:
-        for second in creators:
-            if first != second:
-                if len(first.creations.filter(available=True)) <= len(second.creations.filter(available=True)):
-                    if lowest_creator == "":
-                        lowest_creator = first
-
-                    elif len(first.creations.filter(available=True)) < len(lowest_creator.creations.filter(available=True)):
-                        lowest_creator = first
-
-    return lowest_creator
 @login_required(login_url="account_login")
 @verified_email_required
 def dashboard(request):
@@ -83,29 +55,97 @@ def dashboard(request):
     user_money_spent = 0
     user_completed_orders = 0
     user_pending_orders = 0
-
+    current_situation = "up"
+    user_money_spent_percent = {"percent":0,"move":current_situation}
+    user_pending_orders_percent = {"percent":0,"move":current_situation}
+    user_creation_percent = {"percent":0,"move":current_situation}
+    user_completed_orders_percent = {"percent":0,"move":current_situation}
     try:
-        user_orders = user.user_profile.orders.filter(status="COMPLETED")
-        user_completed_orders += len(user_orders)
+        user_orders = user.user_profile.orders.all()
         if len(user_orders) > 0:
             for order in user_orders:
                 user_money_spent += order.price
 
+        present_month = present_month_spent(user_orders)
+        past_month = previous_month_spent(user_orders)
+        if present_month > 0 and past_month > 0:
+            #percentage difference of a month for user money spent
+            user_money_spent_percent = ((present_month - past_month) / present_month) * 100
+            if present_month >= past_month:
+                current_situation = "up"
+
+            else:
+                current_situation = "down"
+
+            user_money_spent_percent = abs(user_money_spent_percent)
+            user_money_spent_percent = {"percent":user_money_spent_percent,"move":current_situation}
+
     except Order.DoesNotExist:
         user_money_spent = 0
+
+    try:
+        user_completed = user.user_profile.orders.filter(status="COMPLETED")
+        user_completed_orders = len(user_completed)
+
+        present_completed = present_completed_orders(user_completed)
+        past_completed = past_completed_orders(user_completed)
+        if present_completed > 0 and past_completed > 0:
+            #percentage difference of a month for completed orders
+            user_completed_orders_percent = ((present_completed - past_completed) / present_completed) * 100
+            
+            if present_completed >= past_completed:
+                current_situation = "up"
+
+            else:
+                current_situation = "down"
+
+            user_completed_orders_percent = abs(user_completed_orders_percent)
+            user_completed_orders_percent = {"percent":user_completed_orders_percent,"move":current_situation}
+    except Order.DoesNotExist:
         user_completed_orders = 0
 
     #calculate user pending orders
     try:
         user_pending = user.user_profile.orders.filter(status="PENDING")
-        user_pending_orders += len(user_pending)
+        user_pending_orders = len(user_pending)
+
+        present_pending = present_completed_orders(user_pending)
+        past_pending = past_completed_orders(user_pending)
+        if present_pending > 0 and past_pending > 0:
+            #percentage difference of a month for pending orders
+            user_pending_orders_percent = ((present_pending - past_pending) / present_pending) * 100
+            
+            if present_pending >= past_pending:
+                current_situation = "up"
+
+            else:
+                current_situation = "down"
+
+            user_pending_orders_percent = abs(user_pending_orders_percent)
+            user_pending_orders_percent = {"percent":user_pending_orders_percent,"move":current_situation}
     except Order.DoesNotExist:
         user_pending_orders = 0
 
     #calculate user creations
     try:
         user_creations = user.creations.filter(available=True).count()
+        user_creations_c = user.creations.filter(available=True)
 
+        present_creation_month = present_creations(user_creations_c)
+        past_creation_month = past_creations(user_creations_c)
+        if present_creation_month > 0 and past_creation_month > 0:
+            #percentage differemce of a month of creations
+            user_creation_percent = ((present_creation_month - past_creation_month) / present_creation_month) * 100
+            
+            if present_creation_month >= past_creation_month:
+                current_situation = "up"
+
+            else:
+                current_situation = "down"
+        
+            user_creation_percent = abs(user_creation_percent)
+            user_creation_percent = {"percent":user_creation_percent,"move":current_situation}
+        
     except Creation.DoesNotExist:
         user_creations = 0
 
@@ -147,7 +187,7 @@ def dashboard(request):
                                 trending_creators.remove(lowest_creator)
                                 trending_creators.add(creator)
 
-    
+
     #check if user 2fa is authenticated
     data = {
         "2fa_verified": user_has_valid_totp_device(user),
@@ -155,6 +195,10 @@ def dashboard(request):
         "user_completed_orders": user_completed_orders,
         "user_pending_orders": user_pending_orders,
         "user_creations": user_creations,
+        "user_money_spent_percent": user_money_spent_percent,
+        "user_completed_orders_percent": user_completed_orders_percent,
+        "user_pending_orders_percent": user_pending_orders_percent,
+        "user_creation_percent": user_creation_percent,
         "trending_pizzas": trending_pizzas,
         "trending_creators": trending_creators,
     }
@@ -295,3 +339,33 @@ class menu_single(View,UserPassesTestMixin):
         except Creation.DoesNotExist:
             return HttpResponseRedirect(reverse("pizza:menus"))
 
+@login_required(login_url="account_login")
+@verified_email_required
+def creations(request,page):
+    if request.method == "GET":
+        creations = Creation.objects.filter(available=True)
+        creations = Paginator(creations,15)
+        if page in creations.page_range:
+            creations = creations.page(page)
+
+            return JsonResponse([creation.serialize() for creation in creations],status=201,safe=False)
+        
+        return JsonResponse({"message":"Page requested doesn't exist"},status=400)
+
+    return JsonResponse({"message":"wrong request method"},status=403)
+
+class creators(ListView,UserPassesTestMixin):
+    model = User
+    template_name = "pizza/creators.html"
+    context_object_name = "creators"
+    paginate_by = 15
+
+    login_url = "account_login"
+
+    def test_func(self):
+        user = self.request.user
+        emailuser = EmailAddress.objects.get(user=user)
+        return user.is_authenticated and emailuser.verified
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
