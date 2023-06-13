@@ -245,12 +245,12 @@ app.component("charts", {
         });
     },
     template: `
-        <div class="dashboard_graph_container row dashboard_container">
-            <div class="col-sm-12 col-md-9 col-lg-9 dashboard_single">
+        <div class="dashboard_graph_container dashboard_container">
+            <div class="dashboard_single dashboard_first_canvas">
                 <h3>Daily Creations</h3>
                 <canvas id="daily_creations"></canvas>
             </div>
-            <div class="col-sm-12 col-md-3 col-lg-3 dashboard_single">
+            <div class="dashboard_single dashboard_second_canvas">
                 <h3>Daily Expenditure</h3>
                 <canvas id="total_spent"></canvas>
             </div>

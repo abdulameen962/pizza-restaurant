@@ -1,7 +1,8 @@
 $aside: 150px;
 $aside_inactive:240px;
+$leftward: 35px;
 .padding {
-    padding: 15px 35px;
+    padding: 15px 25px 0px 25px;
     @include respond(tab) {
         padding: 10px 20px;
     }
@@ -278,7 +279,38 @@ section.dashboard_nav {
         }
         div.dashboard_single_container {
             @include grid(4);
-            gap: 0px 35px;
+            gap: 0px $leftward;
+            @include respond(tab) {
+                @include grid(3);
+                gap: 25px;
+            }
+            @include respond(lphone) {
+                @include grid(2);
+                gap: 25px;
+            }
+            @include respond(phone) {
+                @include grid(1);
+                gap: 25px 0px;
+            }
+        }
+        div.dashboard_graph_container {
+            display: grid;
+            grid-template-areas: 'line line line doughnut';
+            gap: 0px $leftward;
+            div.dashboard_first_canvas {
+                grid-area: line;
+            }
+            div.dashboard_second_canvas {
+                grid-area: doughnut;
+            }
+        }
+        div.dashboard_bottom_tables_container {
+            @include grid(2);
+            gap: 0px $leftward;
+            @include respond(lphone) {
+                @include grid(1);
+                gap: 25px 0px;
+            }
         }
         div.nav_main_header {
             display: flex;

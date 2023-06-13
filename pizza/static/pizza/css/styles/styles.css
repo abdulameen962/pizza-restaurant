@@ -494,7 +494,7 @@ textarea {
 .padding, section.dashboard_nav aside, section.dashboard_nav div.body_main div.container-main,
 section.dashboard_nav div.body_main div.dashboard-single-main,
 section.dashboard_nav div.body_main div.nav_main_header {
-  padding: 15px 35px; }
+  padding: 15px 25px 0px 25px; }
   @media screen and (min-width: 0px) and (max-width: 991px) {
     .padding, section.dashboard_nav aside, section.dashboard_nav div.body_main div.container-main,
     section.dashboard_nav div.body_main div.dashboard-single-main,
@@ -751,6 +751,48 @@ section.dashboard_nav {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0px 30px;
       gap: 0px 35px; }
+      @media screen and (min-width: 0px) and (max-width: 991px) {
+        section.dashboard_nav div.body_main div.dashboard_single_container {
+          display: grid;
+          justify-content: space-between;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0px 30px;
+          gap: 25px; } }
+      @media screen and (min-width: 0px) and (max-width: 740px) {
+        section.dashboard_nav div.body_main div.dashboard_single_container {
+          display: grid;
+          justify-content: space-between;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0px 30px;
+          gap: 25px; } }
+      @media screen and (min-width: 0em) and (max-width: 479px) {
+        section.dashboard_nav div.body_main div.dashboard_single_container {
+          display: grid;
+          justify-content: space-between;
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 0px 30px;
+          gap: 25px 0px; } }
+    section.dashboard_nav div.body_main div.dashboard_graph_container {
+      display: grid;
+      grid-template-areas: 'line line line doughnut';
+      gap: 0px 35px; }
+      section.dashboard_nav div.body_main div.dashboard_graph_container div.dashboard_first_canvas {
+        grid-area: line; }
+      section.dashboard_nav div.body_main div.dashboard_graph_container div.dashboard_second_canvas {
+        grid-area: doughnut; }
+    section.dashboard_nav div.body_main div.dashboard_bottom_tables_container {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0px 30px;
+      gap: 0px 35px; }
+      @media screen and (min-width: 0px) and (max-width: 740px) {
+        section.dashboard_nav div.body_main div.dashboard_bottom_tables_container {
+          display: grid;
+          justify-content: space-between;
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 0px 30px;
+          gap: 25px 0px; } }
     section.dashboard_nav div.body_main div.nav_main_header {
       display: flex;
       justify-content: space-between; }
