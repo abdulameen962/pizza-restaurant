@@ -8,6 +8,7 @@ const app = Vue.createApp({
         var checkbox = document.querySelector("[type='checkbox']");
         var aside = document.querySelector("aside");
         var navbar = document.querySelector(".responsive_content .responsive_content_nav");
+        var form = document.getElementById("search_form");
         if (inners) {
             inners.forEach(function(e) {
                 if (e.innerHTML == "Sign in with Google") {
@@ -70,6 +71,82 @@ const app = Vue.createApp({
                 }
             }
         }
+        if (form) {
+            const options = document.querySelector(".searchoptions");
+            const input = document.querySelector("[name='search']");
+            var lis = document.querySelectorAll(".searchoptions li");
+            var result_search = document.getElementById("search_result");
+            var search_reset = document.querySelector(".search_reset");
+            var crsf = document.querySelector("[name='csrfmiddlewaretoken']").value;
+            input.onfocus = () => {
+                options.style.display = "block";
+                result_search.style.display = "none";
+            }
+            input.onblur = () => {
+                setTimeout(() => {
+                    options.style.display = "none";
+                    result_search.style.display = "none";
+                }, 500);
+            }
+            lis.forEach(function(e) {
+                e.onclick = () => {
+                    form.dataset.search = e.dataset.search;
+                    input.placeholder = `Search in ${e.dataset.search}`
+                }
+            })
+            form.onsubmit = (event) => {
+                event.preventDefault();
+                fetch("/search/mover/", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": crsf,
+                        },
+                        body: JSON.stringify({
+                            "command": form.dataset.search,
+                            "search_term": input.value
+                        })
+                    })
+                    .then(response => response.json().then(res => {
+                        if (response.status == 200) {
+
+                        } else {
+                            console.log(response.status)
+                        }
+                    }))
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+            if (search_reset) {
+                search_reset.onclick = () => {
+                    result_search.style.display = "none";
+                    options.style.display = "block";
+                }
+            }
+            input.addEventListener("input", function() {
+                fetch("/search/checker/", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": crsf,
+                        },
+                        body: JSON.stringify({
+                            "command": form.dataset.search,
+                            "search_term": input.value
+                        })
+                    })
+                    .then(response => response.json().then(res => {
+                        if (response.status == 200) {
+
+                        } else {
+                            console.log(response.status)
+                        }
+                    }))
+                    .catch(error => {
+                        console.log(error)
+                    })
+            })
+
+        }
     },
     methods: {}
 })
@@ -83,7 +160,7 @@ app.component("dashboard-singles", {
         <div v-for="single in singles" class="dashboard_single">
             <div class="dashboard_single_top">
                 <header class="dashboard_single_top_header">
-                    <h3> {{ single.name }} </h3>
+                    <h4> {{ single.name }} </h4>
                 </header>
                 <span v-if="single.status == 'up'" class="text-success">
                     <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -245,14 +322,16 @@ app.component("charts", {
         });
     },
     template: `
-        <div class="dashboard_graph_container dashboard_container">
-            <div class="dashboard_single dashboard_first_canvas">
-                <h3>Daily Creations</h3>
+        <div class="dashboard_graph_container dashboard_container row">
+            <div class="dashboard_single dashboard_first_canvas col-sm-12 col-md-9 col-lg-9">
+                <h4>Daily Creations</h4>
                 <canvas id="daily_creations"></canvas>
             </div>
-            <div class="dashboard_single dashboard_second_canvas">
-                <h3>Daily Expenditure</h3>
-                <canvas id="total_spent"></canvas>
+            <div class="dashboard_second_canvas col-sm-12 col-md-3 col-lg-3">
+                <div class="dashboard_single dashboard_second_canvas_inner">
+                    <h4>Daily Expenditure</h4>
+                    <canvas id="total_spent"></canvas>
+                </div>
             </div>
         </div>
     `

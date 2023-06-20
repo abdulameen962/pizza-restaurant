@@ -1,6 +1,6 @@
 $aside: 150px;
 $aside_inactive:240px;
-$leftward: 35px;
+$leftward: 25px;
 .padding {
     padding: 15px 25px 0px 25px;
     @include respond(tab) {
@@ -263,7 +263,7 @@ section.dashboard_nav {
                 // background: rgba(#EFF1F5, .5);
             }
             div.dashboard_container {
-                margin: 20px 0px;
+                margin: 30px 0px;
                 div.dashboard_single {
                     background: $white;
                     border-radius: 25px;
@@ -294,14 +294,14 @@ section.dashboard_nav {
             }
         }
         div.dashboard_graph_container {
-            display: grid;
-            grid-template-areas: 'line line line doughnut';
-            gap: 0px $leftward;
-            div.dashboard_first_canvas {
-                grid-area: line;
-            }
+            // div.dashboard_first_canvas {
+            //     grid-area: line_chart;
+            // }
             div.dashboard_second_canvas {
-                grid-area: doughnut;
+                padding-left: $leftward;
+                div.dashboard_second_canvas_inner {
+                    height: 100%;
+                }
             }
         }
         div.dashboard_bottom_tables_container {
@@ -321,10 +321,14 @@ section.dashboard_nav {
             p {
                 @include mp;
             }
+            div.nav_side {
+                @include flex(yes);
+            }
         }
     }
     form {
         position: relative;
+        width: 100%;
         ul.searchoptions,
         ul#search_result {
             display: none;
@@ -350,6 +354,7 @@ section.dashboard_nav {
             margin-right: 30px;
             border: none;
             background: $white;
+            width: 100%;
             outline: none;
             border-radius: 10px;
             padding: 10px 8px;
@@ -362,9 +367,9 @@ section.dashboard_nav {
                 svg {
                     transform: scale(.8);
                 }
-                &:last-child {
-                    border-left: 1px solid #B2B4BE;
-                }
+                // &:last-child {
+                //     border-left: 1px solid #B2B4BE;
+                // }
             }
             input {
                 border: none;
@@ -414,6 +419,15 @@ section.dashboard_nav {
             li {
                 width: 100%;
             }
+        }
+    }
+}
+
+div.dashboard_bottom_tables_container {
+    div.dashboard_single {
+        div.table_top {
+            display: flex;
+            justify-content: space-between;
         }
     }
 }

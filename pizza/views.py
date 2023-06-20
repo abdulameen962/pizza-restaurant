@@ -12,7 +12,10 @@ from django.core.paginator import Paginator
 from django.contrib.admin.views.decorators import staff_member_required
 from .signals import *
 import random
+import json
 from django.contrib.auth.mixins import UserPassesTestMixin
+from scrapy.crawler import CrawlerProcess
+from .scraper import RestaurantScraper
 from .models import *
 from .helper_functions import *
 # Ensure users go through the allauth workflow when logging into admin.
@@ -210,7 +213,7 @@ def dashboard(request):
 def search(request,method):
     user = request.user
 
-    data = request.body
+    data = json.loads(request.body)
     command = data.get("command",)
     search_term = data.get("search_term",)
 
@@ -268,21 +271,22 @@ def search(request,method):
                                 results.add(creation)
 
         if method == "checker":
-            #the redirect vibe
+            #the normal vibe
             if len(results) > 0:
                 responses = []
                 for creation_result in results:
-                    url = request.build_absolute_uri(reverse('menu_single',args=[creation_result.slug]))
+                    url = request.build_absolute_uri(reverse('pizza:menu_single',args=[creation_result.slug]))
                     creation_result_add = {"creation":creation_result.serialize(),"link": url}
                     responses.append(creation_result_add)
 
                 return JsonResponse(responses,status=200,safe=False)
 
         elif method == "mover":
+            #the redirect vibe
             if len(results) > 0:
                 responses = []
                 for creation_result in results:
-                    url = request.build_absolute_uri(reverse('menu_single',args=[creation_result.slug]))
+                    url = request.build_absolute_uri(reverse('pizza:menu_single',args=[creation_result.slug]))
                     responses.append(url)
 
                 redirect_url = random.choices(responses,k=1)[0]
@@ -339,6 +343,7 @@ class menu_single(View,UserPassesTestMixin):
         except Creation.DoesNotExist:
             return HttpResponseRedirect(reverse("pizza:menus"))
 
+
 @login_required(login_url="account_login")
 @verified_email_required
 def creations(request,page):
@@ -354,6 +359,7 @@ def creations(request,page):
 
     return JsonResponse({"message":"wrong request method"},status=403)
 
+
 class creators(ListView,UserPassesTestMixin):
     model = User
     template_name = "pizza/creators.html"
@@ -367,5 +373,60 @@ class creators(ListView,UserPassesTestMixin):
         emailuser = EmailAddress.objects.get(user=user)
         return user.is_authenticated and emailuser.verified
 
+    def get_queryset(self):
+        creators = []
+        users = super().get_queryset()
+        for user in users:
+            if len(user.creations.all()) > 0:
+                creators.append(user)
+
+        return creators
+    
+
     def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+        creators = []
+        users = User.objects.all()
+        for user in users:
+            if len(users.creations.all()) > 0:
+                creators.append(user)
+        creators = Paginator(creators,15)
+
+        context = super().get_context_data(**kwargs)
+
+        context["max_num"] = creators.num_pages
+        context["page_request_var"] = "page"
+        context["page_range"] = creators.page_range
+
+        return context
+
+
+class creator_single(View,UserPassesTestMixin):
+    login_url = "account_login"
+
+    def test_func(self):
+        user = self.request.user
+        emailuser = EmailAddress.objects.get(user=user)
+        return user.is_authenticated and emailuser.verified
+
+    def get(self,request,username):
+        try:
+            requested_user = User.objects.get(username=username)
+
+            return render(request,"pizza/profile.html",{
+                "requested_user": requested_user
+            })
+        except User.DoesNotExist:
+            messages.error(request,"Creator requested doesn't exist")
+            return HttpResponseRedirect(reverse("dashboard"))
+
+
+def scraped(request):
+    process = CrawlerProcess(settings={
+        "FEEDS": {
+            "items.json": {"format":"json"},
+        },
+    })
+    process.crawl(RestaurantScraper)
+    process.start()
+    with open("items.json","r") as f:
+        data = f.read()

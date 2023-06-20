@@ -35,7 +35,7 @@ class Pizza(models.Model):
             "id": self.id,
             "name": self.name,
             "price": self.price,
-            "picture": self.picture.url
+            "picture": self.picture.url if self.picture is not None else '#'
         }
 
 class Category(models.Model):
@@ -74,7 +74,7 @@ class Topping(models.Model):
         return{
             "id": self.id,
             "name": self.name,
-            "picture": self.picture.url,
+            "picture": self.picture.url if self.picture is not None else '#',
             "price": self.price
         }
 class Creation(models.Model):
@@ -84,7 +84,7 @@ class Creation(models.Model):
     description = models.TextField(max_length=500)
     pizza = models.ForeignKey(Pizza, on_delete=models.PROTECT,related_name="pizza_creation")
     category = models.ForeignKey(Category, on_delete=models.PROTECT,related_name="pizza_category",null=True,blank=True)
-    toppings = models.ManyToManyField(Topping,related_name="toppings_creation",blank=True)
+    toppings = models.ManyToManyField(Topping,related_name="toppings_creation",blank=True,default=None)
     picture = CloudinaryField("image",blank=True,default=None,null=True)
     price = models.FloatField(default=0)
     created = models.DateTimeField(auto_now_add=False,default=timezone.now)
@@ -104,7 +104,7 @@ class Creation(models.Model):
             "id": self.id,
             "name": self.name,
             "description": self.description,
-            "picture": self.picture.url,
+            "picture": self.picture.url if self.picture is not None else '#',
             "price": self.price,
             "creator": self.creator.serialize(),
             "pizza": self.pizza.serialize(),

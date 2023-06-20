@@ -1,6 +1,12 @@
 from .models import *
 from django.utils import timezone
 import datetime
+import cloudinary.uploader
+import os
+from django.core.files import File
+from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.conf import settings
 
 present_month = timezone.now().month
 previous_month = timezone.now().replace(day=1) - datetime.timedelta(days=1)
@@ -98,3 +104,21 @@ def past_creations(creations):
     past_month_orders = set()
     
     return calculate_creations(creations,past_month_orders,previous_month)
+
+
+def image_file_converter(path):
+    image_path = os.path.join(settings.BASE_DIR,path)
+
+    if os.path.exists(image_path):
+        with open(image_path,"rb") as file:
+            content = file.read()
+            image_file = ContentFile(content)
+            # uploaded_file = SimpleUploadedFile(name=os.path.basename(image_path),content=image_file.read())
+            # django_file = File(file,name=os.path.basename(image_path))
+            upload_result = cloudinary.uploader.upload(content)
+
+            upload_result_url = upload_result["url"]
+
+            return upload_result_url
+
+    return None

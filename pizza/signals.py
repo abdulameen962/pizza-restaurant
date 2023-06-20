@@ -8,9 +8,13 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
 from .models import *
+from cloudinary import api
 import cloudinary.uploader
-from .image_mixer import mix_image
-from django.core.files.storage import default_storage
+from django.core.files import File
+from .image_mixer import mix_image,delete_image
+from .helper_functions import image_file_converter
+from cloudinary.exceptions import Error as ResourceNotFound
+# from django.core.files.storage import default_storage
 
 @receiver(post_save,sender=User)
 def user_post_save_handler(instance,sender,**kwargs):
@@ -44,34 +48,34 @@ def user_post_save_handler(instance,sender,**kwargs):
         print("it is working up to here")
         send_mail(message=plain_message, from_email=settings.EMAIL_HOST_USER,subject=header,recipient_list=[instance.email],fail_silently=False,html_message=html_message)
 
+
 @receiver(pre_save,sender=Creation)
 def creation_pre_save_handler(instance,sender,**kwargs):
     #check if the name exists
     state = False
     try:
         creation_counts = Creation.objects.filter(name=instance.name)
-        count = creation_counts.count()
-        instance.name = f"{instance.name} {count}"
+        if len(creation_counts) > 1:
+            state = True
+
+        elif len(creation_counts) == 1:
+            creation = Creation.objects.get(name=instance.name)
+            if instance.id != creation.id:
+                # it is a new creation
+                state = True
+
+        if state:
+            count = creation_counts.count()
+            instance.name = f"{instance.name} {count}"
+
     except Creation.DoesNotExist:
         state = not state
 
     instance.slug = (slugify(instance.name))
+
+@receiver(post_save,sender=Creation)
+def creation_post_save_handler(instance,sender,**kwargs):
     #check if an image exists,then create 
-    if instance.picture is None:
-        #create the picture
-        toppings = set()
-        for topping in instance.toppings.all():
-            toppings.add(topping.picture.url)
-
-        new_image = mix_image(instance.pizza.picture.url,instance.toppings.all())
-
-        instance.picture = new_image
-
-        #delete image
-        path = new_image.name
-        if path:
-            default_storage.delete(path)
-        
     if instance.price <= 0:
         #calculate price
         price = 0
@@ -83,7 +87,29 @@ def creation_pre_save_handler(instance,sender,**kwargs):
                 price += topping.price
 
         #add the computed price
+        # print(price)
         instance.price = price
+        instance.save()
+
+    if instance.picture is None:
+        #create the picture
+        toppings = []
+        for topping in instance.toppings.all():
+            toppings.append(topping.picture.url)
+
+        new_image = mix_image(instance.pizza.picture.url,toppings)
+        path = new_image.filename
+        # print(new_image)
+
+        #delete image
+        if path:
+            if image_file_converter(path) is not None:
+                instance.picture = image_file_converter(path)
+                instance.save()
+
+            
+        delete_image(path)
+        
 
 @receiver(pre_save,sender=Order)
 def order_pre_save_handler(instance,sender,**kwargs):
@@ -96,10 +122,16 @@ def order_pre_save_handler(instance,sender,**kwargs):
 #deletion handler for creation
 @receiver(pre_delete,sender=Creation)
 def creation_pre_delete_handler(instance,sender,**kwargs):
-    cloudinary.uploader.destroy(instance.picture,resource_type="image")
-    
-    return
+    if instance.picture is not None:
+        try:
+            image_info = api.resource(instance.picture.url)
 
+            public_id = image_info["public_id"]
+            cloudinary.uploader.destroy(public_id)
+        
+        except ResourceNotFound:
+            state = False
+    
 
 #signal for removing availability of creation when topping is made not available
 @receiver(post_save,sender=Topping)
@@ -114,7 +146,7 @@ def topping_post_handler(instance,sender,**kwargs):
 
 #signal for removing availability of creation when pizza is made unavailable
 @receiver(post_save,sender=Pizza)
-def creation_post_save_handler(instance,sender,**kwargs):
+def pizza_post_save_handler(instance,sender,**kwargs):
     if instance.available == False:
         pizza_creations = instance.pizza_creation.all()
         if len(pizza_creations) > 0:
