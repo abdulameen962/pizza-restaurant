@@ -71,7 +71,7 @@ def dashboard(request):
 
         present_month = present_month_spent(user_orders)
         past_month = previous_month_spent(user_orders)
-        if present_month > 0 and past_month > 0:
+        if present_month > 0:
             #percentage difference of a month for user money spent
             user_money_spent_percent = ((present_month - past_month) / present_month) * 100
             if present_month >= past_month:
@@ -92,7 +92,7 @@ def dashboard(request):
 
         present_completed = present_completed_orders(user_completed)
         past_completed = past_completed_orders(user_completed)
-        if present_completed > 0 and past_completed > 0:
+        if present_completed > 0:
             #percentage difference of a month for completed orders
             user_completed_orders_percent = ((present_completed - past_completed) / present_completed) * 100
             
@@ -114,7 +114,7 @@ def dashboard(request):
 
         present_pending = present_completed_orders(user_pending)
         past_pending = past_completed_orders(user_pending)
-        if present_pending > 0 and past_pending > 0:
+        if present_pending > 0:
             #percentage difference of a month for pending orders
             user_pending_orders_percent = ((present_pending - past_pending) / present_pending) * 100
             
@@ -136,7 +136,7 @@ def dashboard(request):
 
         present_creation_month = present_creations(user_creations_c)
         past_creation_month = past_creations(user_creations_c)
-        if present_creation_month > 0 and past_creation_month > 0:
+        if present_creation_month > 0:
             #percentage differemce of a month of creations
             user_creation_percent = ((present_creation_month - past_creation_month) / present_creation_month) * 100
             
@@ -430,3 +430,15 @@ def scraped(request):
     process.start()
     with open("items.json","r") as f:
         data = f.read()
+
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR  ')
+
+    if x_forwarded_for:
+
+        ip = x_forwarded_for.split(',')[0]
+
+    else:
+
+        ip = request.META.get('REMOTE_ADDR')    
+
+    geolocation_json = json.loads(automate_locator(ip))
