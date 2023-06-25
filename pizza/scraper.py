@@ -1,10 +1,10 @@
 import scrapy
 
+from .geo_locator import links
+
 class RestaurantScraper(scrapy.Spider):
     name = "nearby_restaurant"
-    start_urls = [
-        "https://news.ycombinator.com"
-    ]
+    start_urls = links
     def parse(self, response):  
         for article in response.css("tr.athing"):
             yield {
