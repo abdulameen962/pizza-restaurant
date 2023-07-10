@@ -23,7 +23,6 @@ def get_location(ip):
 
 #get location places to send links of websites
 import pandas as pd
-import requests
 import json
 
 links = []

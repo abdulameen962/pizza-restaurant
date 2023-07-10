@@ -8,6 +8,7 @@ from django.conf import settings
 from allauth.account.decorators import verified_email_required
 from allauth_2fa.utils import user_has_valid_totp_device
 from django.urls import reverse
+from django.db.models import Count
 from django.core.paginator import Paginator
 from django.contrib.admin.views.decorators import staff_member_required
 from .signals import *
@@ -18,6 +19,7 @@ from scrapy.crawler import CrawlerProcess
 from .scraper import RestaurantScraper
 from .models import *
 from .helper_functions import *
+from .geo_locator import automate_locator,get_location
 # Ensure users go through the allauth workflow when logging into admin.
 admin.site.login = staff_member_required(admin.site.login, login_url='/users/login/')
 # Run the standard admin set-up.
@@ -131,7 +133,8 @@ def dashboard(request):
 
     #calculate user creations
     try:
-        user_creations = user.creations.filter(available=True).count()
+        user_creations = user.creations.filter(available=True).aggregate(user_creations=Count("id"))
+        user_creations = user_creations["user_creations"]
         user_creations_c = user.creations.filter(available=True)
 
         present_creation_month = present_creations(user_creations_c)
@@ -157,6 +160,10 @@ def dashboard(request):
 
     pizzas = Creation.objects.filter(available=True)
     if len(pizzas) > 0:
+        if len(pizzas) == 1:
+            for pizza in pizzas:
+                trending_pizzas.add(pizza)
+                
         for pizza in pizzas:
             for second in pizzas:
                 if pizza != second:
@@ -176,6 +183,10 @@ def dashboard(request):
     if len(pizzas) > 0:
         for pizza in pizzas:
             creators.add(pizza.creator)
+            
+        if len(creators) == 1:
+            for creator in creators:
+                trending_creators.add(creator)
 
         for creator in creators:
              for creator2 in creators:
@@ -320,6 +331,8 @@ class menus(ListView,UserPassesTestMixin):
         creations = Creation.objects.filter(available=True)
         creations = Paginator(creations,15)
         context = super().get_context_data(**kwargs)
+
+        # get catgories of pizzas
 
         context["max_num"] = creations.num_pages
         context["page_request_var"] = "page"

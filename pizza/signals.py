@@ -154,3 +154,6 @@ def pizza_post_save_handler(instance,sender,**kwargs):
                 if creation.available:
                     creation.available = False
                     creation.save()
+                    
+                    
+#signals for cart calculation and price

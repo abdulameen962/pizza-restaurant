@@ -803,54 +803,6 @@ section.dashboard_nav {
         justify-content: center;
         align-items: center;
         flex-direction: column; }
-  section.dashboard_nav form {
-    position: relative;
-    width: 100%; }
-    section.dashboard_nav form ul.searchoptions,
-    section.dashboard_nav form ul#search_result {
-      display: none;
-      transition: all 0.5s ease;
-      position: absolute;
-      width: 100%;
-      box-shadow: 0px 4px 10px rgba(41, 44, 50, 0.03);
-      border-radius: 10px;
-      border: 1px solid #E7E9EE;
-      z-index: 3;
-      background: white;
-      border: none; }
-      section.dashboard_nav form ul.searchoptions li,
-      section.dashboard_nav form ul#search_result li {
-        padding: 15px;
-        font-size: 14px;
-        background: none;
-        transition: all 0.5s ease; }
-        section.dashboard_nav form ul.searchoptions li:hover,
-        section.dashboard_nav form ul#search_result li:hover {
-          background: rgba(231, 233, 238, 0.2); }
-    section.dashboard_nav form div.input-group {
-      margin-right: 30px;
-      border: none;
-      background: white;
-      width: 100%;
-      outline: none;
-      border-radius: 10px;
-      padding: 10px 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-content: flex-start; }
-      section.dashboard_nav form div.input-group > span.input-addon {
-        background: none;
-        border: none;
-        height: 20px; }
-        section.dashboard_nav form div.input-group > span.input-addon svg {
-          transform: scale(0.8); }
-      section.dashboard_nav form div.input-group input {
-        border: none;
-        background: none; }
-        section.dashboard_nav form div.input-group input:hover, section.dashboard_nav form div.input-group input:active, section.dashboard_nav form div.input-group input:focus {
-          box-shadow: none;
-          border: none; }
   section.dashboard_nav .active_main {
     width: calc(100vw - 240px); }
     @media screen and (min-width: 0px) and (max-width: 991px) {
@@ -886,6 +838,70 @@ section.dashboard_nav {
 div.dashboard_bottom_tables_container div.dashboard_single div.table_top {
   display: flex;
   justify-content: space-between; }
+
+form#search_form {
+  position: relative;
+  width: 100%; }
+  form#search_form ul.searchoptions,
+  form#search_form ul#search_result {
+    display: none;
+    transition: all 0.5s ease;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(41, 44, 50, 0.03);
+    border-radius: 10px;
+    border: 1px solid #E7E9EE;
+    z-index: 3;
+    background: white;
+    border: none; }
+    form#search_form ul.searchoptions li,
+    form#search_form ul#search_result li {
+      padding: 15px;
+      font-size: 14px;
+      background: none;
+      transition: all 0.5s ease; }
+      form#search_form ul.searchoptions li:hover,
+      form#search_form ul#search_result li:hover {
+        background: rgba(231, 233, 238, 0.2); }
+  form#search_form div.input-group {
+    margin-right: 30px;
+    border: none;
+    background: white;
+    width: 100%;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start; }
+    form#search_form div.input-group > span.input-addon {
+      background: none;
+      border: none;
+      height: 20px; }
+      form#search_form div.input-group > span.input-addon svg {
+        transform: scale(0.8); }
+    form#search_form div.input-group input {
+      border: none;
+      background: none; }
+      form#search_form div.input-group input:hover, form#search_form div.input-group input:active, form#search_form div.input-group input:focus {
+        box-shadow: none;
+        border: none; }
+
+section.main_right_dashboard div.left div.left-top {
+  width: 400px;
+  max-width: 100%; }
+
+section.main_right_dashboard div.left div.left-main div.menu-menu {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0px 30px;
+  gap: 25px 35px; }
+
+section.main_right_dashboard div.right {
+  margin: 0;
+  padding: 0; }
 
 body {
   margin: 0;

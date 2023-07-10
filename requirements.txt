@@ -51,7 +51,7 @@ hyperlink==21.0.0
 idna==3.4
 incremental==22.10.0
 ipykernel==6.23.2
-ipython==8.14.0
+ipython
 ipython-genutils==0.2.0
 ipywidgets==8.0.6
 isoduration==20.11.0
@@ -79,7 +79,7 @@ nbconvert==7.6.0
 nbformat==5.9.0
 nest-asyncio==1.5.6
 notebook_shim==0.2.3
-numpy==1.25.0
+numpy
 oauthlib==3.2.2
 overrides==7.3.1
 packaging==23.1
@@ -95,7 +95,7 @@ prometheus-client==0.17.0
 prompt-toolkit==3.0.38
 Protego==0.2.1
 psutil==5.9.5
-psycopg2==2.9.6
+# psycopg2==2.9.6
 psycopg2-binary==2.9.6
 pure-eval==0.2.2
 pyasn1==0.5.0
@@ -107,7 +107,7 @@ Pygments==2.15.1
 PyJWT==2.6.0
 pyOpenSSL==23.1.1
 pypng==0.20220715.0
-pyproj==3.6.0
+pyproj
 pyrsistent==0.19.3
 python-dateutil==2.8.2
 python-dotenv==1.0.0

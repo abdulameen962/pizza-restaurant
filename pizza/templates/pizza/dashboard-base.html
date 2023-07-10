@@ -13,13 +13,13 @@
                     <a class="navbar-brand" href="/"><img src="{% static 'pizza/css/images/icon_single.svg' %}" alt="logo"/></a>
                     {% if user.is_authenticated %}
                         <ul class="navbar_main_content">
-                            <li><a href="#">
+                            <li><a href="{% url 'pizza:dashboard' %}">
                                 <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.3528 0.696774C12.8343 0.246792 12.1781 0 11.5 0C10.8219 0 10.1657 0.246792 9.64722 0.696774L1.02222 8.19038C0.702087 8.46822 0.444742 8.81471 0.268177 9.20563C0.0916115 9.59655 8.65423e-05 10.0225 0 10.4536V22.6973C0 23.9684 1.00178 25 2.23611 25H6.06944C6.6625 25 7.23126 24.7574 7.65061 24.3256C8.06997 23.8937 8.30556 23.308 8.30556 22.6973V17.4301C8.30556 16.5353 8.99811 15.809 9.86061 15.7853H13.1394C13.5556 15.7966 13.9512 15.9749 14.2416 16.2821C14.5321 16.5894 14.6946 17.0013 14.6944 17.4301V22.6973C14.6944 23.9684 15.6962 25 16.9306 25H20.7639C21.3569 25 21.9257 24.7574 22.3451 24.3256C22.7644 23.8937 23 23.308 23 22.6973V10.4523C22.9999 10.0211 22.9084 9.59523 22.7318 9.20431C22.5553 8.81339 22.2979 8.4669 21.9778 8.18906L13.3528 0.696774Z" fill="#808080"/>
                                 </svg>                                                                                                                   
                                 <span class="expand_content">Home</span></a>
                             </li>
-                            <li><a href="#">
+                            <li><a href="{% url 'pizza:menus' %}">
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.9469 0.244808C12.0194 0.167208 12.1057 0.10564 12.2006 0.0636316C12.2955 0.0216234 12.3972 0 12.5 0C12.6028 0 12.7045 0.0216234 12.7994 0.0636316C12.8943 0.10564 12.9806 0.167208 13.0531 0.244808L15.9484 3.33462H21.875C22.7038 3.33462 23.4987 3.68579 24.0847 4.31088C24.6708 4.93596 25 5.78376 25 6.66776V21.6669C25 22.5509 24.6708 23.3987 24.0847 24.0237C23.4987 24.6488 22.7038 25 21.875 25H3.125C2.2962 25 1.50134 24.6488 0.915291 24.0237C0.32924 23.3987 0 22.5509 0 21.6669V6.66776C0 5.78376 0.32924 4.93596 0.915291 4.31088C1.50134 3.68579 2.2962 3.33462 3.125 3.33462H9.05156L11.9469 0.244808ZM1.5625 11.6675V16.6672H23.4375V11.6675H1.5625ZM23.4375 10.0009V6.66776C23.4375 6.22576 23.2729 5.80186 22.9799 5.48932C22.6868 5.17678 22.2894 5.00119 21.875 5.00119H15.9484C15.5341 5.0011 15.1367 4.82545 14.8438 4.51289L12.5 2.01304L10.1562 4.51289C9.86329 4.82545 9.46593 5.0011 9.05156 5.00119H3.125C2.7106 5.00119 2.31317 5.17678 2.02015 5.48932C1.72712 5.80186 1.5625 6.22576 1.5625 6.66776V10.0009H23.4375ZM23.4375 18.3337H1.5625V21.6669C1.5625 22.1089 1.72712 22.5328 2.02015 22.8453C2.31317 23.1578 2.7106 23.3334 3.125 23.3334H21.875C22.2894 23.3334 22.6868 23.1578 22.9799 22.8453C23.2729 22.5328 23.4375 22.1089 23.4375 21.6669V18.3337ZM3.125 7.50104C3.125 7.28004 3.20731 7.06809 3.35382 6.91182C3.50034 6.75555 3.69905 6.66776 3.90625 6.66776H16.4062C16.6135 6.66776 16.8122 6.75555 16.9587 6.91182C17.1052 7.06809 17.1875 7.28004 17.1875 7.50104C17.1875 7.72204 17.1052 7.93399 16.9587 8.09026C16.8122 8.24653 16.6135 8.33433 16.4062 8.33433H3.90625C3.69905 8.33433 3.50034 8.24653 3.35382 8.09026C3.20731 7.93399 3.125 7.72204 3.125 7.50104ZM3.125 14.1673C3.125 13.9463 3.20731 13.7344 3.35382 13.5781C3.50034 13.4218 3.69905 13.334 3.90625 13.334H21.0938C21.301 13.334 21.4997 13.4218 21.6462 13.5781C21.7927 13.7344 21.875 13.9463 21.875 14.1673C21.875 14.3883 21.7927 14.6003 21.6462 14.7565C21.4997 14.9128 21.301 15.0006 21.0938 15.0006H3.90625C3.69905 15.0006 3.50034 14.9128 3.35382 14.7565C3.20731 14.6003 3.125 14.3883 3.125 14.1673ZM3.125 20.8336C3.125 20.6126 3.20731 20.4006 3.35382 20.2444C3.50034 20.0881 3.69905 20.0003 3.90625 20.0003H13.2812C13.4885 20.0003 13.6872 20.0881 13.8337 20.2444C13.9802 20.4006 14.0625 20.6126 14.0625 20.8336C14.0625 21.0546 13.9802 21.2665 13.8337 21.4228C13.6872 21.5791 13.4885 21.6669 13.2812 21.6669H3.90625C3.69905 21.6669 3.50034 21.5791 3.35382 21.4228C3.20731 21.2665 3.125 21.0546 3.125 20.8336Z" fill="#808080"/>
                                 </svg>                                                                           
@@ -82,59 +82,61 @@
         </aside>
 
         <div class="body_main">
-            <div class="nav_main_header">
-                <header>
-                    <h3>{{ site_name }}</h3>
-                    <p>{% now "j F, o" %}</p>
-                </header>
-                
-                <div class="nav_side resize-small">
-                    <form method="POST" id="search_form" data-search="menu" target="stopperframe">
-                        {% csrf_token %}
-                        <div class="input-group flex-nowrap">                   
-                            <input type="text" class="form-control" aria-describedby="search-addon" placeholder="Search category,menu etc..." name="search" required/>
-                            <span class="input-group-text input-addon" id="addon-wrapping"> 
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_79_2)">
-                                    <path d="M17.9888 19.729L23.2586 25L25 23.2586L19.729 17.9888C21.3008 16.028 22.1558 13.5892 22.1522 11.0761C22.1522 4.9621 17.1901 0 11.0761 0C4.9621 0 0 4.9621 0 11.0761C0 17.1901 4.9621 22.1522 11.0761 22.1522C13.5892 22.1558 16.028 21.3009 17.9888 19.729ZM17.0757 17.2603C15.4695 18.8221 13.3165 19.6944 11.0761 19.6909C6.3158 19.6909 2.4614 15.8351 2.4614 11.0761C2.4614 6.31584 6.3158 2.46136 11.0761 2.46136C15.8351 2.46136 19.6909 6.31584 19.6909 11.0761C19.6944 13.3165 18.8221 15.4695 17.2603 17.0757L17.0757 17.2603Z" fill="#B2B4BE"/>
-                                    </g>
-                                    <defs>
-                                    <clipPath id="clip0_79_2">
-                                    <rect width="25" height="25" fill="white" transform="matrix(-1 0 0 1 25 0)"/>
-                                    </clipPath>
-                                    </defs>
-                                </svg>                                                                 
-                            </span> 
-                        </div>
-                        <ul class="searchoptions">
-                            <li data-search="category">Category</li>
-                            <li data-search="menu">Menu</li>
-                            <li data-search="topping">Toppings of Pizza</li>
-                            <li data-search="pizza">Pizza name</li>
+            {% block dashboard_content %}
+                <div class="nav_main_header">
+                    <header>
+                        <h3>{{ site_name }}</h3>
+                        <p>{% now "j F, o" %}</p>
+                    </header>
+                    
+                    <div class="nav_side resize-small">
+                        <form method="POST" id="search_form" data-search="menu" target="stopperframe">
+                            {% csrf_token %}
+                            <div class="input-group flex-nowrap">                   
+                                <input type="text" class="form-control" aria-describedby="search-addon" placeholder="Search category,menu etc..." name="search" required/>
+                                <span class="input-group-text input-addon" id="addon-wrapping"> 
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_79_2)">
+                                        <path d="M17.9888 19.729L23.2586 25L25 23.2586L19.729 17.9888C21.3008 16.028 22.1558 13.5892 22.1522 11.0761C22.1522 4.9621 17.1901 0 11.0761 0C4.9621 0 0 4.9621 0 11.0761C0 17.1901 4.9621 22.1522 11.0761 22.1522C13.5892 22.1558 16.028 21.3009 17.9888 19.729ZM17.0757 17.2603C15.4695 18.8221 13.3165 19.6944 11.0761 19.6909C6.3158 19.6909 2.4614 15.8351 2.4614 11.0761C2.4614 6.31584 6.3158 2.46136 11.0761 2.46136C15.8351 2.46136 19.6909 6.31584 19.6909 11.0761C19.6944 13.3165 18.8221 15.4695 17.2603 17.0757L17.0757 17.2603Z" fill="#B2B4BE"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_79_2">
+                                        <rect width="25" height="25" fill="white" transform="matrix(-1 0 0 1 25 0)"/>
+                                        </clipPath>
+                                        </defs>
+                                    </svg>                                                                 
+                                </span> 
+                            </div>
+                            <ul class="searchoptions">
+                                <li data-search="category">Category</li>
+                                <li data-search="menu">Menu</li>
+                                <li data-search="topping">Toppings of Pizza</li>
+                                <li data-search="pizza">Pizza name</li>
 
 
-                        </ul>
-                        <ul id="search_result">
+                            </ul>
+                            <ul id="search_result">
 
-                        </ul>
-                    </form>
+                            </ul>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="container-main">
-                {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                {% block content %}{% endblock  %}
-            </div>
+                <div class="container-main">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% block content %}{% endblock  %}
+                </div>
+            {% endblock  %}
 
         </div>
     </section>

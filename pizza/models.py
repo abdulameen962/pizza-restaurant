@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.utils import timezone
+import uuid
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class User(AbstractUser):
@@ -137,11 +139,32 @@ class Order(models.Model):
     pieces = models.IntegerField()
     price = models.FloatField()
     order_date = models.DateTimeField(auto_now_add=False,default=timezone.now)
-    order_completed_date = models.DateTimeField(auto_now_add=False,blank=True)
+    # name = models.CharField(_("Name of event"),blank=True,max_length=255)
     status = models.CharField(choices=STATUS_CHOICES,default="PENDING")
 
+    def __str__(self):
+        return f"{self.id} {self.user.username}"
+    
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
 
     
+class Cart(models.Model):
+    id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
+    items = models.ManyToManyField(Order,related_name="order_cart",blank=True,default=None)
+    order_completed_date = models.DateTimeField(auto_now_add=False,blank=True,default=timezone.now)
+    user = models.OneToOneField(User, on_delete=models.PROTECT,related_name="user_cart")
+    price = models.FloatField(_("Total price"),default=0.0)
+    created_at = models.DateTimeField(auto_now_add=False,default=timezone.now)
+    
+    def __str__(self):
+        return f"{self.user.username}'s cart has {len(self.items.all)} items all worth {self.price}"
+    
+    class Meta:
+        verbose_name = "Cart"
+        verbose_name_plural = "Carts"
+        ordering = ("created_at",)
+    
+#uuid primary id field
+#     id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)

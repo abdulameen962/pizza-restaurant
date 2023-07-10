@@ -1,0 +1,151 @@
+{% extends 'pizza/dashboard-base.html' %}
+{% block title %} Menu {% endblock  %}
+{% block dashboard_content %}
+<section class="row main_right_dashboard">
+    <div class="col-sm-12 col-md-7 col-lg-7 left">
+        <div class="left-top">
+            <form method="POST" id="search_form" data-search="menu" target="stopperframe">
+                {% csrf_token %}
+                <div class="input-group flex-nowrap">                   
+                    <input type="text" class="form-control" aria-describedby="search-addon" placeholder="Search category,menu etc..." name="search" required/>
+                    <span class="input-group-text input-addon" id="addon-wrapping"> 
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_79_2)">
+                            <path d="M17.9888 19.729L23.2586 25L25 23.2586L19.729 17.9888C21.3008 16.028 22.1558 13.5892 22.1522 11.0761C22.1522 4.9621 17.1901 0 11.0761 0C4.9621 0 0 4.9621 0 11.0761C0 17.1901 4.9621 22.1522 11.0761 22.1522C13.5892 22.1558 16.028 21.3009 17.9888 19.729ZM17.0757 17.2603C15.4695 18.8221 13.3165 19.6944 11.0761 19.6909C6.3158 19.6909 2.4614 15.8351 2.4614 11.0761C2.4614 6.31584 6.3158 2.46136 11.0761 2.46136C15.8351 2.46136 19.6909 6.31584 19.6909 11.0761C19.6944 13.3165 18.8221 15.4695 17.2603 17.0757L17.0757 17.2603Z" fill="#B2B4BE"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_79_2">
+                            <rect width="25" height="25" fill="white" transform="matrix(-1 0 0 1 25 0)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>                                                                 
+                    </span> 
+                </div>
+                <ul class="searchoptions">
+                    <li data-search="category">Category</li>
+                    <li data-search="menu">Menu</li>
+                    <li data-search="topping">Toppings of Pizza</li>
+                    <li data-search="pizza">Pizza name</li>
+
+
+                </ul>
+                <ul id="search_result">
+
+                </ul>
+            </form>
+        </div>
+        <ul class="left-items">
+            {% for item in list_items %}
+                <li>
+                    <img src="{{ item.img }}" alt="{{ item.name }}"/>
+                    <span> {{ item.name }} </span>
+                </li>
+            
+            {% endfor %}
+        </ul>
+        <div class="left-main">
+            <div class="left-main-top">
+                <header>
+                    <h3> Choose Pizza </h3>
+                </header>
+                <div>
+                    <span>Other text</span>
+                </div>
+            </div>
+            <div class="menu-menu">
+                {% for menu in menus %}
+                    <div class="menu-singles">
+                        <div class="menu-single-top">
+                            <img src="{{ menu.picture.url }}" alt="{{ menu.name }}"/>
+                        </div>
+                        <div class="menu-single-bottom">
+                            <h4> {{ menu.name }} </h4>
+                            <p>${{ menu.price }} </p>
+                            
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-5 col-lg-5 right">
+        <div class="current_orders">
+            <div class="current_orders_top">
+                <div class="current_orders_top_left">
+                    <h5> Current Orders </h5>
+                    <p> #{{ cart.id }} </p>
+                    <div class="current_orders_top_left_categories">
+
+
+                    </div>
+                </div>
+                <div class="current_orders_top_right">
+                    <h5> Items </h5>
+                    <p> {{ cart.items.all.count }} </p>
+                </div>
+            </div>
+            <div class="current_orders_middle">
+                {% for item in cart.items.all %}
+                    <div class="item_order">
+                        <div class="item_order_left">
+                            <div>
+                                <img src="{{ item.order.picture.url }}" alt="{{ item.order.name }}"/>
+                            </div>
+                        </div>
+                        <div class="item_order_right">
+                            <h5> {{ item.order.name }} </h5>
+                            <p>Pizza type: {{ item.order.pizza.name }}</p>
+                            <p>
+                                Toppings:
+                                {% for topping in item.order.toppings.all %}
+                                {{ topping.name }},
+                                {% endfor %}
+                            </p>
+                            <span class="item_price"> ${{ item.price }} </span>
+                            <div class="item_order_number_adjustment">
+                                <div class="item_order_number_adjustment_container">
+                                    <div class="item_order_number_adjustment_icon minus">
+                                        <span> - </span>
+                                    </div>
+                                    <div class="item_order_number_adjustment_number">
+                                        <span> {{ item.order.pieces }} </span>
+                                    </div>
+                                    <div class="item_order_number_adjustment_icon right">
+                                        <span> + </span>
+                                    </div>
+                                </div>
+                                <div class="item_order_removal">
+                                    🚮
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                {% endfor %}
+            </div>
+            <div class="current_orders_bottom">
+                <div class="current_orders_bottom_top">
+                    <div class="item_count">
+                        <span>Items({{ cart.item.all.count }})</span>
+                        <span> ${{ cart.price }} </span>
+                    </div>
+                    <div class="tax_count">
+                        <span>Tax(0%)</span>
+                        <span> $0 </span>
+                    </div>
+                </div>
+                <div class="current_orders_bottom_bottom">
+                    <div class="total_count">
+                        <span>Total</span>
+                        <span> ${{ cart.price }} </span>
+                    </div>
+                    <div class="payment">
+                        <button> <a href="#"> Complete Orders </a> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}
