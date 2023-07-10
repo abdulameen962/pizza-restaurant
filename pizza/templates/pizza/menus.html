@@ -76,7 +76,11 @@
                     <h5> Current Orders </h5>
                     <p> #{{ cart.id }} </p>
                     <div class="current_orders_top_left_categories">
-
+                        {% for category in categories %}
+                            <div class="current_orders_top_left_categories_category_single">
+                                {{ category.title }}
+                            </div>
+                        {% endfor %}
 
                     </div>
                 </div>

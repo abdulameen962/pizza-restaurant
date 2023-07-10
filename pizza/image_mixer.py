@@ -48,7 +48,7 @@ def mix_image(pizza,toppings):
                 # mask = Image.new("L", top.size, 0)
                 # draw = ImageDraw.Draw(mask)
                 # draw.rectangle((800, 800, 800, 800), fill=255)
-                first_intermediate = Image.composite(first_intermediate,topping)
+                first_intermediate = Image.alpha_composite(first_intermediate,topping)
 
         for topping in main_toppings:
             path = topping.filename

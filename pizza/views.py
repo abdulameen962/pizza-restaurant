@@ -333,10 +333,23 @@ class menus(ListView,UserPassesTestMixin):
         context = super().get_context_data(**kwargs)
 
         # get catgories of pizzas
-
+        user = self.request.user
+        try:
+            cart = Cart.objects.get(user=user)
+        except Cart.DoesNotExist:
+            cart = []
+            
+        items = user.user.user_cart.items.all()
+        categories = set()
+        if items.aggregate(Count("id"))['id__count'] > 0:
+            for item in items:
+                categories.add(item.order.category)
+        
         context["max_num"] = creations.num_pages
         context["page_request_var"] = "page"
         context["page_range"] = creations.page_range
+        context["categories"] = categories
+        context["cart"] = cart
 
         return context
 

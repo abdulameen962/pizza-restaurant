@@ -1,0 +1,277 @@
+[{
+        "model": "sessions.session",
+        "pk": "09l1f6m85iw1s8rwtn0wvmd5sica4llp",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q9jn4:UymH77QSHV6WSoUqr2xa8sfkvdMcBW47-SsuHBSNzbA",
+            "expire_date": "2023-06-29T10:01:18.415Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "1d7b1vpyw51dum8vshv5pmnpggwlbrs3",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q6KyE:cNoU8V0IZOkzjsNd51O8ym2Qar1f8n1i0zcLjYZ3tZg",
+            "expire_date": "2023-06-20T00:54:46.195Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "1qj7t3qupv0mhdgqa5quqcsgzp0entu1",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln2Ov5R0ucM0dq74ACypTipEHeHSCmgfTPzXmLCbS3T1nmZZhJnocXpd0uYH1x3QHestyZzq-syJ7kr8qBdjo34eTncv4OCvXxrYBUB0DhvGNzVO6PQAdrobeDstaMhIKhs2QRMRltNQyRNaIJ3GrJ4fwC32jbb:1qADTp:QBWxd3xtwNrB30pInI8lAbiN-LjFDKfBFVJdVvoLaOo",
+            "expire_date": "2023-06-30T17:43:25.974Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "4qdzaa1lsmk4jfejw03dkno6asfniz02",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln2Ov5R0ucM0dq74ACypTipEHeHSCmgfTPzXmLCbS3T1nmZZhJnocXpd0uYH1x3QHestyZzq-syJ7kr8qBdjo34eTncv4OCvXxrYBUB0DhvGNzVO6PQAdrobeDstaMhIKhs2QRMRltNQyRNaIJ3GrJ4fwC32jbb:1q4NOn:V22Lv2NCnbnleg2uixcsNWF21Qjqd3gUVOXVDwzuUMA",
+            "expire_date": "2023-06-14T15:06:05.508Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "78ica2kfsw9vus1k6rlnwklm0tsnhgnv",
+        "fields": {
+            "session_data": ".eJxdjskOgjAQht-lZ4Nd6AI3fZFmaIfQSIDQYjTGd7csidHLJP8y38yLQN_DkjrLW7BLxNkGT2rCyInYiDGGcbD4mML8JDXN3tb96329BtwNhzU4sAU4Ny5DKrbOEcfikhUOKThI-cD12PpBdRC7zOFIK85BKC2Qq1YrQUFxkJWWBp1mypcGOHUShYFGMMl8WXnmQRitGHcZOqbJerwHh_vPq055FOvYg7Mh7w87HFm5:1q6V5g:XRgU-rM7zPIBAgibxXB_UASAxpG_Vbli50Kce-Jcmg4",
+            "expire_date": "2023-06-20T11:43:08.697Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "7wvlj2tme8r1ckrp0pyvq66ecremq1tw",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1qIYxc:Y-USUC_vJzm9Kq0IW1vticm9nw3SX3_10ltDjdnk6Js",
+            "expire_date": "2023-07-23T18:16:40.587Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "99wzpemhca6ox5wnb213ihgo1m88v89q",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q7dpn:a2FmhWGZLQNQpS0g4g-vqj4iMp7vFFnge478XiUXgng",
+            "expire_date": "2023-06-23T15:15:27.884Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "dpeykxtro1sqvzre0ye4b9us6jap3kxp",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q6V6F:GX14zn4fGHTWIp7yH5IHD2QKc-whSvf0shLlpummD0k",
+            "expire_date": "2023-06-20T11:43:43.650Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "g15vr25gkhav19hs6ec51kphc6dx8cbi",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1qGae0:JZe8DpXgq0KXY3yj1tI1NWMmy3U_veuvNt0O__CuJjU",
+            "expire_date": "2023-07-18T07:40:16.834Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "k54z9ciocza5zapnnojb7q4dz396rwj5",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q8NGH:iRzxRVZezLccDBeqH8wW_4joezuORZdU0DryrBetdsg",
+            "expire_date": "2023-06-25T15:45:49.367Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "n1rz5nt6su4dfrvdjfbac6j8z7jraeyo",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q8GG1:omZpNFspV7-ggopk1nqE-DPY5ophuHcRU7vE9zuMo8E",
+            "expire_date": "2023-06-25T08:17:05.703Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "twrjgw03nmdvm6qjwbw6h36zyzby6e9c",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q7DUr:sevUFtsSzzzBS2rJMp7g4qEMSED1-CxpY3d_LXqTzgQ",
+            "expire_date": "2023-06-22T11:08:05.017Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "wsllpjfr3nzveoszsy27r7vwcsvcclim",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q94m0:g7UfvFr7YOuAkAJSprguxFcTijhaBwaxbEbwihKvAoM",
+            "expire_date": "2023-06-27T14:13:28.344Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "xndp1zxfz842pbsliw28kn2wmzca6t5b",
+        "fields": {
+            "session_data": ".eJxVjs0OwiAQhN-Fs0F-WqDe9EXIFtaU2NCmUKMxvrtge-llkplvd3Y_xCZMKUzR4msOy5tc2IlYWPNg14SLDZ5cCCeHrAf3wFgBjGONKTg3rTHT_8yOE70WhzEHB7kcuO1bh6oB0lB6BLJOCJBKSxTqrpVkoAS0nW4NOs2VbwwI5lqUBnrJW-6bznMP0mjFhSulU56tx2dwuP1cfS5Cq2zgbMj3B40QUQ0:1q6vuQ:AcSwZiyUiD1J7I9AUlGb8t7ZxTcNyH-v-kGTF-aCpfg",
+            "expire_date": "2023-06-21T16:21:18.507Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "z6fv1rrr62h8bl3hico8f2o4s2tnao6i",
+        "fields": {
+            "session_data": "eyJhbGxhdXRoXzJmYV91c2VyX2lkIjoiMSIsIl9zZXNzaW9uX2V4cGlyeSI6MH0:1q6vsp:fJeDihbMI9U398Gr74BPpIyJXQoyd8KObUbih9GkWkY",
+            "expire_date": "2023-06-21T16:19:39.484Z"
+        }
+    },
+    {
+        "model": "sites.site",
+        "fields": {
+            "domain": "example.com",
+            "name": "example.com"
+        }
+    },
+    {
+        "model": "pizza.user",
+        "fields": {
+            "password": "pbkdf2_sha256$600000$CSN3dZMKUKAa1lZA41cHRm$lVaMpPo/CLHUZPwKrgQvNCpRpRkKyIz32h5nm+AAzyg=",
+            "last_login": "2023-07-09T18:16:28.718Z",
+            "is_superuser": true,
+            "username": "Abdul",
+            "first_name": "",
+            "last_name": "",
+            "email": "sanniabdulameen7@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-05-31T09:44:01.672Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "pizza.pizza",
+        "pk": 1,
+        "fields": {
+            "name": "Brocolli awesome",
+            "price": 150.0,
+            "picture": "image/upload/v1686937639/g3mhzv9baliwhpccgmz1.png",
+            "available": true
+        }
+    },
+    {
+        "model": "pizza.pizza",
+        "pk": 2,
+        "fields": {
+            "name": "Black olives dark",
+            "price": 200.0,
+            "picture": "image/upload/v1686937818/c9maismutystbnm7jxav.png",
+            "available": true
+        }
+    },
+    {
+        "model": "pizza.pizza",
+        "pk": 3,
+        "fields": {
+            "name": "Pepperoni regular",
+            "price": 180.0,
+            "picture": "image/upload/v1686938567/ics6uo021j0u1xmvr75b.png",
+            "available": true
+        }
+    },
+    {
+        "model": "pizza.category",
+        "pk": 1,
+        "fields": {
+            "title": "Italian",
+            "code": "ITL"
+        }
+    },
+    {
+        "model": "pizza.category",
+        "pk": 2,
+        "fields": {
+            "title": "Swahili",
+            "code": "SWH"
+        }
+    },
+    {
+        "model": "pizza.category",
+        "pk": 3,
+        "fields": {
+            "title": "Nigerian",
+            "code": "NGN"
+        }
+    },
+    {
+        "model": "pizza.topping",
+        "pk": 1,
+        "fields": {
+            "name": "Pepperoni",
+            "picture": "image/upload/v1686939222/o5zobbaiyiwavm9uhv9d.png",
+            "price": 10.0,
+            "available": true,
+            "date_created": "2023-06-16T18:10:37Z"
+        }
+    },
+    {
+        "model": "pizza.topping",
+        "pk": 2,
+        "fields": {
+            "name": "Black olives",
+            "picture": "image/upload/v1686939342/ahbpz3fwgxnzkclrckcb.png",
+            "price": 8.0,
+            "available": true,
+            "date_created": "2023-06-16T18:15:16Z"
+        }
+    },
+    {
+        "model": "pizza.topping",
+        "pk": 3,
+        "fields": {
+            "name": "Green Olives",
+            "picture": "image/upload/v1686939391/syxatpwd6dxfy08tvyi3.png",
+            "price": 7.0,
+            "available": true,
+            "date_created": "2023-06-16T18:15:57Z"
+        }
+    },
+    {
+        "model": "pizza.topping",
+        "pk": 4,
+        "fields": {
+            "name": "Lettuce",
+            "picture": "image/upload/v1686939433/z3iw1tgfty34mw5neu6j.png",
+            "price": 8.0,
+            "available": true,
+            "date_created": "2023-06-16T18:16:45Z"
+        }
+    },
+    {
+        "model": "pizza.topping",
+        "pk": 5,
+        "fields": {
+            "name": "Onions",
+            "picture": "image/upload/v1686939511/feuqqxhs7xlextaihx4v.png",
+            "price": 7.0,
+            "available": true,
+            "date_created": "2023-06-16T18:17:25Z"
+        }
+    },
+    {
+        "model": "pizza.creation",
+        "pk": 17,
+        "fields": {
+            "creator": [
+                "Abdul"
+            ],
+            "name": "Pepperoni Heaven",
+            "slug": "pepperoni-heaven",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facilis illum et at corrupti in earum illo voluptatibus, ducimus cum, porro dolores quae, sint iure numquam! Labore vel optio temporibus!",
+            "pizza": 3,
+            "category": 1,
+            "picture": "image/upload/http://res.cloudinary.com/abdulameen/image/upload/v1688986742/frqxmzeru14kdswpsaog.png",
+            "price": 180.0,
+            "created": "2023-06-19T11:11:35Z",
+            "available": true,
+            "toppings": [
+                5,
+                3,
+                1
+            ]
+        }
+    }
+]

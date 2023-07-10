@@ -134,16 +134,17 @@ class Order(models.Model):
         ("PENDING","PENDING"),
         ("COMPLETED","COMPLETED"),
     )
+    id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     user = models.ForeignKey(Userprofile, on_delete=models.CASCADE,related_name="orders")
     order = models.ForeignKey(Creation, on_delete=models.CASCADE,related_name="creation_orders")
     pieces = models.IntegerField()
-    price = models.FloatField()
+    price = models.FloatField(default=0.0)
     order_date = models.DateTimeField(auto_now_add=False,default=timezone.now)
     # name = models.CharField(_("Name of event"),blank=True,max_length=255)
     status = models.CharField(choices=STATUS_CHOICES,default="PENDING")
 
     def __str__(self):
-        return f"{self.id} {self.user.username}"
+        return f"{self.id} {self.user.user.username}"
     
     class Meta:
         verbose_name = "Order"
